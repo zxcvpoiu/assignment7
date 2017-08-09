@@ -114,7 +114,18 @@ public class ChatClientApplication extends Application {
 	
 	private void setUpNetworking() throws Exception {
 		@SuppressWarnings("resource")
-		Socket sock = new Socket("10.145.100.195", 4242);
+		boolean getConnection = false;
+		Socket sock = null;
+		while(!getConnection){
+			String[] results = IPPrompt.display();
+			try{
+			sock = new Socket(results[0], Integer.parseInt(results[1]));
+			getConnection = true;
+			}
+			catch(Exception e){
+				IPPrompt.displayError();
+			}
+		}
 		InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
 		reader = new BufferedReader(streamReader);
 		writer = new PrintWriter(sock.getOutputStream());

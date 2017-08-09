@@ -13,6 +13,7 @@ public class ServerMain extends Observable {
 	private static ArrayList<String> usersServer = new ArrayList<String>();
 	private int id = 1;
 	private int channels =0;
+	private int portNum = 4242;
 	private String joined = "";
 	
 	public static void main(String[] args) {
@@ -25,8 +26,9 @@ public class ServerMain extends Observable {
 
 	private void setUpNetworking() throws Exception {
 		System.out.println("MY IP address is " + InetAddress.getLocalHost().getHostAddress());
+		System.out.println("my port number is " + portNum);
 		@SuppressWarnings("resource")
-		ServerSocket serverSock = new ServerSocket(4242);
+		ServerSocket serverSock = new ServerSocket(portNum);
 		while (true) {
 			Socket clientSocket = serverSock.accept();
 			ClientObserver writer = new ClientObserver(clientSocket.getOutputStream());
