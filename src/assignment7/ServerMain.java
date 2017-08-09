@@ -3,6 +3,7 @@ package assignment7;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -23,8 +24,9 @@ public class ServerMain extends Observable {
 	}
 
 	private void setUpNetworking() throws Exception {
+		System.out.println("MY IP address is " + InetAddress.getLocalHost().getHostAddress());
 		@SuppressWarnings("resource")
-		ServerSocket serverSock = new ServerSocket(4248);
+		ServerSocket serverSock = new ServerSocket(4242);
 		while (true) {
 			Socket clientSocket = serverSock.accept();
 			ClientObserver writer = new ClientObserver(clientSocket.getOutputStream());
